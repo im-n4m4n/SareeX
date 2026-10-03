@@ -26,15 +26,15 @@ test("All categories and collection filters lead to shoppable pieces", async ({ 
   await expect(page.locator("#wardrobe-categories > div.grid > a")).toHaveCount(6);
   await page.goto("/collections");
   // Counts follow the seeded catalogue: the Diwali expansion added the
-  // "Shubh Deepavali" collection (9 → 10) and two evening drapes to
-  // Moonlit Drapes (3 → 5). Updated alongside seed-data, not to mask a bug.
+  // "Shubh Deepavali" collection (9 → 10) and the glamour capsule added three
+  // evening drapes to Moonlit Drapes (3 → 8). Updated alongside seed-data.
   await expect(page.locator("#collection-stories h3")).toHaveCount(10);
   await page.getByRole("button", { name: "Evening", exact: true }).click();
   await expect(page.locator("#collection-stories h3")).toHaveCount(2);
   await page.locator("#collection-stories").getByRole("link", { name: /Moonlit Drapes/ }).click();
   await expect(page).toHaveURL(/collection=moonlit-drapes/);
   await expect(page.locator("#shop-pieces").getByRole("heading", { name: "Moonlit Drapes", exact: true })).toBeVisible();
-  await expect(page.locator("#shop-pieces article")).toHaveCount(5);
+  await expect(page.locator("#shop-pieces article")).toHaveCount(8);
   await page.goto("/shop?category=dupattas");
   await expect(page.locator("#shop-pieces article")).toHaveCount(2);
   await page.screenshot({ path: "test-results/elite-weavers-dupattas.png", fullPage: true });

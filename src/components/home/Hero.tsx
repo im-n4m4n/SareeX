@@ -24,9 +24,7 @@ export default function Hero() {
       if (!prefersReducedMotion()) gsap.fromTo("[data-hero-img]", { scale: 1.07 }, { scale: 1, duration: 4.2, ease: "power3.out" });
     }, root);
 
-    // Pinned scrub only on desktop-sized viewports with no reduced-motion preference.
-    // Matched to every other pinned section (DrapeScene/Lookbook/CraftSplit) so phones
-    // keep a smooth static hero instead of a per-frame clip-path/scale scrub.
+    // Full pinned scrub on desktop-sized viewports with no reduced-motion preference.
     mm.add(DESKTOP_MQ, () => {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -51,6 +49,23 @@ export default function Hero() {
         // autoAlpha (not opacity) so hidden elements also leave the tab order.
         .to("[data-hero-side], [data-hero-marker]", { autoAlpha: 0, ease: "none" }, 0)
         .to("[data-hero-tag]", { y: -60, ease: "none" }, 0);
+    }, root);
+
+    // Mobile keeps a simplified but still-animated hero: compositor-only
+    // opacity/transform tweens with a light scrub — no pin, no clip-path.
+    // This restores scroll motion on phones while staying smooth on GPUs.
+    mm.add("(max-width: 767.98px) and (prefers-reduced-motion: no-preference)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top top",
+          end: "60%",
+          scrub: 0.6,
+        },
+      });
+      tl.to("[data-hero-zoom]", { scale: 1.08, ease: "none" }, 0)
+        .to("[data-hero-copy]", { y: -70, opacity: 0, ease: "none" }, 0)
+        .to("[data-hero-side]", { autoAlpha: 0, ease: "none" }, 0);
     }, root);
 
     return () => { mm.revert(); context.revert(); };

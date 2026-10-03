@@ -317,6 +317,52 @@ export const extraProducts: SeedProduct[] = [
     story: "Tussar is a wild silk with a naturally golden cast, spun from cocoons gathered in the forests of Bhagalpur and its surrounds.",
     colors: [colors.peacock, colors.indigo, colors.gold], images: [image("m27"), image("m21")],
   }),
+  // --- Glamour capsule: evening & festive drapes on new campaign imagery ---
+  product({
+    slug: "noor-wine-satin-silk-saree", name: "Noor Wine Satin Silk Saree", price: 18400, compareAtPrice: 21900,
+    weave: "georgette", fabric: "Satin Silk", occasion: "evening", collection: "moonlit-drapes",
+    tagline: "Liquid wine · Modern drape", work: "Satin sheen with hand-finished border",
+    badge: "New Glam", featured: true, stock: 9, rating: 4.8, reviewCount: 12,
+    description: "A lustrous wine satin silk with a modern silhouette and a hand-finished border. Cut for the spotlight — an evening drape that holds its sheen under every light.",
+    story: "The satin weave takes its deep colour from a double-dye bath, then the border is set by hand so the hem falls in a clean liquid line.",
+    colors: [colors.wine, colors.maroon, colors.ruby], images: [image("m29"), image("m23")],
+  }),
+  product({
+    slug: "raat-black-sequin-georgette-saree", name: "Raat Black Sequin Georgette Saree", price: 19900, compareAtPrice: 23500,
+    weave: "georgette", fabric: "Georgette", occasion: "evening", collection: "moonlit-drapes",
+    tagline: "After-dark sparkle · Editorial", work: "Gold sequin on sheer georgette",
+    badge: "New Glam", featured: true, stock: 8, rating: 4.9, reviewCount: 15,
+    description: "A sheer black georgette scattered with gold sequins that catch every flash. Made for after-dark celebrations and the photographs that follow.",
+    story: "Sequins are applied by hand on a stretched frame, spaced so the sheer georgette keeps its fluidity and the shimmer moves as you do.",
+    colors: [colors.noir, colors.gold], images: [image("m30"), image("m23")],
+  }),
+  product({
+    slug: "nagmas-emerald-silk-saree", name: "Naghma Emerald Silk Saree", price: 21400, compareAtPrice: 24900,
+    weave: "mysore", fabric: "Mulberry Silk", occasion: "festive", collection: "temple-gold",
+    tagline: "Emerald glow · Golden hour", work: "Gold zari border on lustrous silk",
+    badge: "New Glam", featured: true, stock: 10, rating: 4.9, reviewCount: 11,
+    description: "A shimmering emerald mulberry silk with a gold zari border and a fluid, glossy drape. Colour with real depth — richest under warm evening light.",
+    story: "Woven in Mysuru from pure mulberry crepe, the silk's natural sheen needs no embellishment; the zari border does the talking.",
+    colors: [colors.emerald, colors.gold], images: [image("m31"), image("m18")],
+  }),
+  product({
+    slug: "sunheri-banarasi-orange-saree", name: "Sunheri Banarasi Orange Saree", price: 22900, compareAtPrice: 26400,
+    weave: "banarasi", fabric: "Katan Silk", occasion: "festive", collection: "shubh-deepavali",
+    tagline: "Burnt orange · Festival gold", work: "Gold zari buti on katan silk",
+    badge: "Diwali Edit", featured: true, stock: 7, rating: 4.9, reviewCount: 13,
+    description: "A burnt-orange katan silk Banarasi with gold zari butis and a modern sleeveless-blouse-ready body. Bold festive colour with heritage weave.",
+    story: "The orange is dyed deep so the gold zari sits against warmth rather than brightness — a Diwali-evening colour, not a noon colour.",
+    colors: [colors.saffron, colors.marigold, colors.gold], images: [image("m32"), image("m24")],
+  }),
+  product({
+    slug: "neel-rimlight-silk-saree", name: "Neel Rimlight Silk Saree", price: 20900,
+    weave: "mysore", fabric: "Silk", occasion: "evening", collection: "moonlit-drapes",
+    tagline: "Royal blue · Silver zari", work: "Silver zari on royal-blue silk",
+    featured: true, stock: 9, rating: 4.8, reviewCount: 9,
+    description: "A royal-blue silk with silver zari that reads almost metallic in low light. A dramatic evening drape with a quietly modern attitude.",
+    story: "Silver zari against deep blue is a classic Mysore pairing — the metallic thread picks up ambient colour, so the saree shifts with the room.",
+    colors: [colors.peacock, colors.indigo], images: [image("m33"), image("m27")],
+  }),
 ];
 
 export const extraWeaves = [

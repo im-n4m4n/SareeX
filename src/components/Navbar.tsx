@@ -88,7 +88,7 @@ export default function Navbar({ user, categories }: { user: { name: string; rol
                 {l.label}<ChevronDown className={cn("h-3 w-3 transition-transform duration-500", mega && "rotate-180")} /><span className="absolute -bottom-2 left-0 h-px w-full origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100" />
               </button>
             ) : (
-              <Link key={l.label} href={l.href} onMouseEnter={() => setMega(false)} className="group relative text-[12px] tracking-wide">
+              <Link key={l.label} href={l.href} onMouseEnter={() => setMega(false)} className={cn("group relative text-[12px] tracking-wide", l.href === "/diwali" && "festive-nav-link text-marigold font-medium")}>
                 {l.label}<span className="absolute -bottom-2 left-0 h-px w-full origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100" />
               </Link>
             ))}

@@ -519,3 +519,36 @@ main h2:not([data-silk-done]) {
   0%, 100% { opacity: 0.75; }
   50% { opacity: 1; }
 }
+
+/* Festival-highlighted Diwali nav link: warm glow + diya flicker underline. */
+.festive-nav-link {
+  color: var(--color-marigold);
+  text-shadow: 0 0 12px rgba(224, 162, 27, 0.55);
+}
+.festive-nav-link::before {
+  content: "";
+  position: absolute;
+  inset: -6px -10px;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center, rgba(226, 113, 29, 0.22), transparent 70%);
+  pointer-events: none;
+}
+.festive-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e2711d, #e0a21b, #f4e2a8);
+  animation: diya-flicker 2.4s ease-in-out infinite;
+}
+@keyframes diya-flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.55; }
+  60% { opacity: 0.9; }
+}
+@media (max-width: 767px) {
+  .festive-nav-link::before, .festive-nav-link::after { animation: none; }
+}
