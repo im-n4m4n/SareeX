@@ -9,7 +9,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { MaskLines, Lotus } from "../ui";
-import { getLenis, prefersReducedMotion } from "@/lib/animations";
+import { DESKTOP_MQ, getLenis, prefersReducedMotion } from "@/lib/animations";
 import { CONTAINER } from "@/lib/layout";
 
 export default function Hero() {
@@ -24,7 +24,10 @@ export default function Hero() {
       if (!prefersReducedMotion()) gsap.fromTo("[data-hero-img]", { scale: 1.07 }, { scale: 1, duration: 4.2, ease: "power3.out" });
     }, root);
 
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    // Pinned scrub only on desktop-sized viewports with no reduced-motion preference.
+    // Matched to every other pinned section (DrapeScene/Lookbook/CraftSplit) so phones
+    // keep a smooth static hero instead of a per-frame clip-path/scale scrub.
+    mm.add(DESKTOP_MQ, () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,

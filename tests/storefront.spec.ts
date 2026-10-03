@@ -25,13 +25,16 @@ test("All categories and collection filters lead to shoppable pieces", async ({ 
   await page.goto("/categories");
   await expect(page.locator("#wardrobe-categories > div.grid > a")).toHaveCount(6);
   await page.goto("/collections");
-  await expect(page.locator("#collection-stories h3")).toHaveCount(9);
+  // Counts follow the seeded catalogue: the Diwali expansion added the
+  // "Shubh Deepavali" collection (9 → 10) and two evening drapes to
+  // Moonlit Drapes (3 → 5). Updated alongside seed-data, not to mask a bug.
+  await expect(page.locator("#collection-stories h3")).toHaveCount(10);
   await page.getByRole("button", { name: "Evening", exact: true }).click();
   await expect(page.locator("#collection-stories h3")).toHaveCount(2);
   await page.locator("#collection-stories").getByRole("link", { name: /Moonlit Drapes/ }).click();
   await expect(page).toHaveURL(/collection=moonlit-drapes/);
   await expect(page.locator("#shop-pieces").getByRole("heading", { name: "Moonlit Drapes", exact: true })).toBeVisible();
-  await expect(page.locator("#shop-pieces article")).toHaveCount(3);
+  await expect(page.locator("#shop-pieces article")).toHaveCount(5);
   await page.goto("/shop?category=dupattas");
   await expect(page.locator("#shop-pieces article")).toHaveCount(2);
   await page.screenshot({ path: "test-results/elite-weavers-dupattas.png", fullPage: true });
@@ -132,6 +135,32 @@ test("Every catalogue image resolves and the occasions grid renders", async ({ p
   await page.goto("/");
   const occasions = page.locator("#occasions a[href^='/shop?occasion=']");
   await expect(occasions).toHaveCount(5);
+});
+
+test("Diwali Special page renders festival theme, banner and festive grid", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/diwali");
+  await expect(page.locator(".theme-diwali")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Deepavali/i);
+  await expect(page.getByText("DIWALI15", { exact: false }).first()).toBeVisible();
+  await expect(page.locator("#festival-edit article").first()).toBeVisible();
+
+  // Homepage entry: the festival banner card links through to the special page.
+  await page.goto("/");
+  const banner = page.getByRole("link", { name: /Let's have a look/i });
+  await expect(banner).toBeVisible();
+  // force: the homepage runs infinite ambient animations, so Playwright's
+  // stability heuristic can stall; the assertion below is the real check.
+  await banner.click({ force: true });
+  await expect(page).toHaveURL(/\/diwali/);
+  expect(errors).toEqual([]);
+});
+
+test("DIWALI15 festival coupon applies 15% above the minimum order", async ({ request }) => {
+  const coupon = await request.post("/api/misc/coupon", { data: { code: "DIWALI15", subtotal: 10000 } });
+  expect(coupon.ok()).toBeTruthy();
+  expect((await coupon.json()).discount).toBe(1500);
 });
 
 test("Protected routes reject anonymous access and security headers are set", async ({ request }) => {

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useMounted } from "@/lib/useMounted";
 import { Heart, ShoppingBag } from "lucide-react";
 import type { Product } from "@/db/schema";
@@ -36,20 +37,24 @@ export default function ProductCard({ product: p, layout = "grid" }: { product: 
     <article data-silk className={cn("group", layout === "list" && "grid grid-cols-[140px_1fr] gap-5 sm:grid-cols-[200px_1fr]")}>
       <div className="sheen relative aspect-[3/4] overflow-hidden rounded-2xl bg-blush shadow-[0_18px_40px_-26px_rgba(28,21,18,0.5)]">
         <Link href={"/product/" + p.slug} aria-label={p.name} className="absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          {/* next/image serves right-sized variants instead of the 500KB+ originals,
+              which keeps phones from decoding full-res photos mid-scroll. */}
+          <Image
             src={cover}
             alt=""
+            fill
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:opacity-0"
+            sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw"
+            className="object-cover transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:opacity-0"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={hover}
             alt=""
             aria-hidden
+            fill
             loading="lazy"
-            className="absolute inset-0 h-full w-full scale-105 object-cover opacity-0 transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100 group-hover:opacity-100"
+            sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw"
+            className="scale-105 object-cover opacity-0 transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100 group-hover:opacity-100"
           />
         </Link>
         {badge && (

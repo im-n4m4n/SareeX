@@ -18,6 +18,7 @@ type Category = { slug: string; name: string; image: string | null; pieceCount: 
 const links = [
   { href: "/shop?new=1", label: "New In" },
   { href: "/shop?category=sarees", label: "Sarees" },
+  { href: "/diwali", label: "Diwali" },
   { href: "/categories", label: "Wardrobe", menu: true },
   { href: "/collections", label: "Collections" },
   { href: "/craft", label: "The Craft" },
@@ -62,7 +63,8 @@ export default function Navbar({ user, categories }: { user: { name: string; rol
   }, [menu, search]);
 
   // The search overlay must also drop the transparent-over-hero treatment.
-  const overHero = pathname === "/" && !scrolled && !menu && !mega && !search;
+  // /diwali opens with a dark festival hero, so the nav floats transparent there too.
+  const overHero = (pathname === "/" || pathname === "/diwali") && !scrolled && !menu && !mega && !search;
   const count = mounted ? cartCount(items) : 0;
   // Cards shown in the mega menu: derived from data, not three hardcoded slugs.
   const featureCards = categories.filter((c) => !["sarees", "lehengas"].includes(c.slug)).slice(0, 3);

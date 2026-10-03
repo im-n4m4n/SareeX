@@ -454,6 +454,7 @@ export const seedCollections = [
 export const seedCoupons = [
   { code: "ELITE10", type: "percent", value: 10, minOrder: 0 },
   { code: "WELCOME500", type: "flat", value: 500, minOrder: 5000 },
+  { code: "DIWALI15", type: "percent", value: 15, minOrder: 5000 },
 ];
 
 export const seedReviews = [

@@ -147,8 +147,8 @@ export function PetalFall({ count = 16 }: { count?: number }) {
   );
 }
 
-const bg = { ivory: "bg-ivory", blush: "bg-blush", espresso: "bg-espresso" } as const;
-const tx = { ivory: "text-ivory", blush: "text-blush", espresso: "text-espresso" } as const;
+const bg = { ivory: "bg-ivory", blush: "bg-blush", espresso: "bg-espresso", "plum-deep": "bg-plum-deep" } as const;
+const tx = { ivory: "text-ivory", blush: "text-blush", espresso: "text-espresso", "plum-deep": "text-plum-deep" } as const;
 
 /** Mughal-arch scalloped transition between two sections with a gold hairline. */
 export function ArchDivider({ from, to }: { from: keyof typeof bg; to: keyof typeof tx }) {
