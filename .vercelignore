@@ -1,0 +1,13 @@
+node_modules
+.next
+.env
+.env*.local
+SareeX Details.txt
+uploads
+test-results
+playwright-report
+*.log
+bun-install.*
+npm-err.log
+npm-out.log
+tsconfig.tsbuildinfo
